@@ -1,7 +1,9 @@
-import Display.Display;
-
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+
+import Display.Display;
+import Gfx.ImageLoader;
 
 public class Game implements Runnable {
 
@@ -18,8 +20,6 @@ public class Game implements Runnable {
 
     private Graphics g;
 
-    private int bX, bY = 0;
-
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
@@ -32,12 +32,10 @@ public class Game implements Runnable {
     }
 
     private void update() {
-        bX++;
-        bY++;
+
     }
 
     private void render() {
-        // IF IT DOESN'T WORK MOVE LINE 29
         bs = display.getCanvas().getBufferStrategy();
         g = bs.getDrawGraphics();
 
@@ -46,7 +44,6 @@ public class Game implements Runnable {
         // Clear Screen
         g.clearRect(0,0, width,height);
 
-        g.drawRect(bX,bY, 50,50);
 
         //---  END DRAW  ---
 
@@ -67,7 +64,6 @@ public class Game implements Runnable {
     }
 
     public synchronized void start() {
-
         // Ensure no duplicate start
         if (running) return;
 
@@ -77,7 +73,6 @@ public class Game implements Runnable {
     }
 
     public synchronized void stop() {
-
         // Ensure no duplicate stop
         if (!running) return;
 
